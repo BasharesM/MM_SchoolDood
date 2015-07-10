@@ -19,6 +19,7 @@ create table doodles (
        title varchar(255) not null,
        question varchar(255) not null,
        status int(1) default 1 not null,
+       token int(40) not null,
        primary key(did),
        foreign key(uid) references users(uid)
 );
