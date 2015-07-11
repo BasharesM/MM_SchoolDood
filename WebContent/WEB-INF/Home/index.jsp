@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
- 
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c_rt" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -21,9 +21,9 @@
 
 
 
-<c:if test="${not empty requestScope.logout}">
-	Déconnexion réussie.
-</c:if>
+<c_rt:if test="${requestScope.logout}">
+	Déconnexion réussie s.
+</c_rt:if>
 
 <% if(request.getAttribute("logout") != null) { %>
 	Déconnexion réussie.
