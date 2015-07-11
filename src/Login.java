@@ -63,23 +63,26 @@ public class Login extends HttpServlet {
 		    try {
 		        connexion = DriverManager.getConnection( url, utilisateur, motDePasse );
 
-		        String sql = "select * from users where username=? and password=?;" ;
+		        String sql = "select * from users where first_name=? and password=?;" ;
 		        		
 		        PreparedStatement preparedStatement =
 		                (PreparedStatement) connexion.prepareStatement(sql);
 
 		        preparedStatement.setString(1, username);
-		        System.out.println(DigestUtils.sha1Hex("soleil"));
-		        preparedStatement.setString(2, DigestUtils.sha1Hex("soleil"));
-		        //preparedStatement.setLong  (3, 123);
+		        preparedStatement.setString(2, DigestUtils.sha1Hex(password));
 
-		        ResultSet users = preparedStatement.executeQuery();
-		        
-		        while (users.next()){
-		        	System.out.println(users.getString(2));
+		        ResultSet user = preparedStatement.executeQuery();
+		        		
+		        if (user.next()){
 		        	
+		        	session.setAttribute("user", user);
+		    		session.setAttribute("logged", true);
+		    		
+		    		this.getServletContext().getRequestDispatcher("/WEB-INF/Login/index.jsp").forward(request, response);
 		        }
-		        System.out.println("It works ! ");
+		        else {
+		        	this.getServletContext().getRequestDispatcher("/WEB-INF/Home/index.jsp").forward(request, response);
+		        }	
 
 		    } catch ( SQLException e ) {
 
@@ -103,14 +106,6 @@ public class Login extends HttpServlet {
 
 
 		}
-		
-		
-		if (username.compareTo("username") == 0 && password.compareTo("p") == 0) {
-			session.setAttribute("username", username);
-			session.setAttribute("logged", true);
-		}
-		
-		this.getServletContext().getRequestDispatcher("/WEB-INF/Login/index.jsp").include(request, response);
 	}
 
 }

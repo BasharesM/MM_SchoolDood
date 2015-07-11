@@ -10,7 +10,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%= request.getSession().getAttribute("username") %>
+<%= request.getSession().getAttribute("user") %>
 
 <a href="/MM_SchoolDood/logout">Déconnexion</a>
 </body>
