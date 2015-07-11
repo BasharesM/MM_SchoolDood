@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+ 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,20 +10,7 @@
 </head>
 <body>
 
-<div class="mdl-card mdl-shadow--2dp demo-card-wide">
-  <div class="mdl-card__title">
-    <h2 class="mdl-card__title-text">Welcome</h2>
-  </div>
-  <div class="mdl-card__supporting-text">
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-    Mauris sagittis pellentesque lacus eleifend lacinia...
-  </div>
-  <div class="mdl-card__actions mdl-card--border">
-    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-      Get Started
-    </a>
-  </div>
-  <div class="mdl-card__menu">
+
 	<form method="post" action="/MM_SchoolDood/login">
 		<label for="username">Pseudo : </label>
 		<input type="text" name="username"/>
@@ -31,11 +19,15 @@
 		<input type="submit" value="S'inscrire"/>
 	</form>
 
-    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-      <i class="material-icons">share</i>
-    </button>
-  </div>
-</div>
+
+
+<c:if test="${not empty requestScope.logout}">
+	Déconnexion réussie.
+</c:if>
+
+<% if(request.getAttribute("logout") != null) { %>
+	Déconnexion réussie.
+<% } %>
 
 
 <script src="/MM_SchoolDood/static/js/material.min.js"></script>

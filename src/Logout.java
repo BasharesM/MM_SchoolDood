@@ -9,16 +9,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class Login
+ * Servlet implementation class Logout
  */
-@WebServlet("/Login")
-public class Login extends HttpServlet {
+@WebServlet("/Logout")
+public class Logout extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Login() {
+    public Logout() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,7 +28,14 @@ public class Login extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served adsdt: ").append(request.getContextPath());
+		
+		// On détruit la session
+		HttpSession session = request.getSession(true);
+		session.invalidate();
+		
+		request.setAttribute("logout", true);
+		
+		this.getServletContext().getRequestDispatcher("/WEB-INF/Home/index.jsp").include(request, response);
 	}
 
 	/**
@@ -36,17 +43,8 @@ public class Login extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
 		
-		HttpSession session = request.getSession(true);    
-		
-		if (username.compareTo("username") == 0 && password.compareTo("p") == 0) {
-			session.setAttribute("username", username);
-			session.setAttribute("logged", true);
-		}
-		
-		this.getServletContext().getRequestDispatcher("/WEB-INF/Login/index.jsp").include(request, response);
+		doGet(request, response);
 	}
 
 }

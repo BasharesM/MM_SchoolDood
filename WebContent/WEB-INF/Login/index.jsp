@@ -8,5 +8,7 @@
 </head>
 <body>
 <%= request.getSession().getAttribute("username") %>
+
+<a href="/MM_SchoolDood/logout">Déconnexion</a>
 </body>
 </html>
