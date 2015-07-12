@@ -1,30 +1,26 @@
 package models;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
 import com.mysql.jdbc.PreparedStatement;
 
 import entities.User;
-import utils.MysqlDriver;
 
-public class UserRepository {
+public class UserRepository extends AbstractRepository {
 		
+	public UserRepository() {
+		super("users");
+	}
 	public User login(String username, String password) {
-		
-		java.sql.Connection connexion = null;
-		
+				
 		try {
-		   
-			MysqlDriver driver = MysqlDriver.getDriver();
-			connexion = driver.getConnector();
-		        
+		 	        
 			String sql = "select * from users where first_name=? and password=?;" ;
 		        		
 			PreparedStatement preparedStatement =
-					(PreparedStatement) connexion.prepareStatement(sql);
+					(PreparedStatement) this.connexion.prepareStatement(sql);
 
 			preparedStatement.setString(1, username);
 			preparedStatement.setString(2, DigestUtils.sha1Hex(password));
@@ -40,19 +36,10 @@ public class UserRepository {
 						item.getString("email")
 				);
 				
-				driver.disconnect();
 				return user;
 			}
 		} catch (Exception e) {
-			if (connexion != null) {
-				try {
-					connexion.close();
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-			System.out.println(e.toString());
+			System.err.println(e.toString());
 		}
 		
 		return null;
