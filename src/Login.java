@@ -18,7 +18,8 @@ import org.apache.commons.codec.digest.DigestUtils;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 
-import models.User;
+import entities.User;
+import models.UserRepository;
 
 /**
  * Servlet implementation class Login
@@ -27,14 +28,14 @@ import models.User;
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	private User user; 
+	private UserRepository user; 
     /**
      * @see HttpServlet#HttpServlet()
      */
     public Login() {
         super();
         
-        this.user = new User();
+        this.user = new UserRepository();
         // TODO Auto-generated constructor stub
     }
 
@@ -57,8 +58,10 @@ public class Login extends HttpServlet {
 		
 		HttpSession session = request.getSession(true);  
 		
-		if (this.user.login(username, password)){
-			session.setAttribute("user", this.user);	
+		User user = this.user.login(username, password);
+		
+		if (user != null){
+			session.setAttribute("user", user);	
 			session.setAttribute("logged", true);
 
 			this.getServletContext().getRequestDispatcher("/WEB-INF/Login/index.jsp").forward(request, response);
