@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col s12 m6">
 		<div class="card blue lighten-5">
-		<form method="post" action="/MM_SchoolDood/login">
+		<form method="post" action="/MM_SchoolDood/user/register">
 			<div class="card-content black-text">
 				<span class="card-title black-text" style="margin-bottom: 10px;">Inscription</span>
 				<div style="margin-top: 10px;">
