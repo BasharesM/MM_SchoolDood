@@ -13,6 +13,29 @@ public class UserRepository extends AbstractRepository {
 	public UserRepository() {
 		super("users");
 	}
+	
+	public boolean save(String first_name, String last_name, String email, String password) {
+		
+		try {
+			String sql = "insert into users (first_name, last_name, email, password) value (?,?,?,?);";
+			
+			PreparedStatement preparedStatement = 
+					(PreparedStatement) this.connexion.prepareStatement(sql);
+			
+			preparedStatement.setString(1, first_name);
+			preparedStatement.setString(2, last_name);
+			preparedStatement.setString(3, email);
+			preparedStatement.setString(4, DigestUtils.sha1Hex(password));
+			
+			if (preparedStatement.executeUpdate() == 1) {
+				return true;
+			}
+		} catch (Exception e) {
+			System.err.println(e.toString());
+		}
+		return false;
+	}
+	
 	public User login(String username, String password) {
 				
 		try {
