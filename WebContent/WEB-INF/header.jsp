@@ -16,7 +16,7 @@
 	<nav class="blue lighten-3">
 		<div class="container">
 			<div class="nav-wrapper">
-				<a href="#!" class="brand-logo">School Dood</a>
+				<a href="${pageContext.request.contextPath}/home" class="brand-logo">School Dood</a>
 				<ul class="right hide-on-med-and-down">
 					<li><a href="sass.html">Sass</a></li>
 					<li><a href="badges.html">Components</a></li>
@@ -29,3 +29,31 @@
 	</nav>
 
 	<div class="container" style="padding-top: 20px;">
+	
+	<c_rt:if test="${requestScope.messageFlash}">
+		<div class="row">
+	      <div class="col s12 m5">
+	        <div class="card-panel teal">
+	          <span class="white-text">
+	          
+	            <%
+					if (request.getAttribute("message") == "logout") {
+				%>
+					Déconnexion réussie.
+				<%
+					}
+				%>
+				
+				<%
+					if (request.getAttribute("message") == "loginError") {
+				%>
+					Identifiants incorrects.
+				<%
+					}
+				%>
+	          	
+	          </span>
+	        </div>
+	      </div>
+	    </div>
+    </c_rt:if>    

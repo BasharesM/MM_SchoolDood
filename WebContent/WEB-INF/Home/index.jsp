@@ -44,17 +44,3 @@
 
 	</div>
 </div>
-
-<!--
-<c_rt:if test="${requestScope.logout}">
-	Déconnexion réussie s.
-</c_rt:if>
--->
-
-<%
-	if (request.getAttribute("logout") != null) {
-%>
-Déconnexion réussie.
-<%
-	}
-%>

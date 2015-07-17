@@ -33,8 +33,7 @@ public class Logout extends ServletAbstract {
 		HttpSession session = request.getSession(true);
 		session.invalidate();
 		
-		request.setAttribute("logout", true);
-		super.displayLayout("/WEB-INF/Home/index.jsp", request, response);
+		super.displayLayout("/WEB-INF/Home/index.jsp", request, response, "logout");
 	}
 
 	/**

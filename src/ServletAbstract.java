@@ -42,6 +42,15 @@ public class ServletAbstract extends HttpServlet {
 	}
 	
 	protected void displayLayout(String jsp, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		this.displayLayout(jsp, request, response, "");
+	}
+	
+	protected void displayLayout(String jsp, HttpServletRequest request, HttpServletResponse response, String messageFlash) throws ServletException, IOException {
+		if(messageFlash != "") {
+			request.setAttribute("messageFlash", true);
+			request.setAttribute("message", messageFlash);
+		}
+		
 		this.getServletContext().getRequestDispatcher("/WEB-INF/header.jsp").include(request, response);
 		this.getServletContext().getRequestDispatcher(jsp).include(request, response);
 		this.getServletContext().getRequestDispatcher("/WEB-INF/footer.jsp").include(request, response);

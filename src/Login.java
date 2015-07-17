@@ -35,7 +35,7 @@ public class Login extends ServletAbstract {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served adsdt: ").append(request.getContextPath());
+		// response.getWriter().append("Served adsdt: ").append(request.getContextPath());
 	}
 
 	/**
@@ -47,7 +47,7 @@ public class Login extends ServletAbstract {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		
-		HttpSession session = request.getSession(true);  
+		HttpSession session = request.getSession(true);
 		
 		User user = this.user.login(username, password);
 		
@@ -57,7 +57,7 @@ public class Login extends ServletAbstract {
 			super.displayLayout("/WEB-INF/Login/index.jsp", request, response);
 		}
 		else {
-			super.displayLayout("/WEB-INF/Home/index.jsp", request, response);
+			super.displayLayout("/WEB-INF/Home/index.jsp", request, response, "loginError");
 		}	
 	}
 
