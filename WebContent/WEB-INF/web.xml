@@ -13,9 +13,17 @@
     <welcome-file>/home</welcome-file>
   </welcome-file-list>
   <servlet>
-  	<servlet-name>Doodle</servlet-name>
-  	<servlet-class>Doodle</servlet-class>
+    <servlet-name>Doodle</servlet-name>
+    <servlet-class>Doodle</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>UserController</servlet-name>
+    <servlet-class>UserController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>UserController</servlet-name>
+   	<url-pattern>/user/register</url-pattern>
+ </servlet-mapping>
   <servlet>
     <servlet-name>Login</servlet-name>
     <servlet-class>Login</servlet-class>
