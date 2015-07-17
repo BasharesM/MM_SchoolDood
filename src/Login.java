@@ -1,10 +1,6 @@
 
 
 import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,11 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.codec.digest.DigestUtils;
-
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.PreparedStatement;
-
 import entities.User;
 import models.UserRepository;
 
@@ -25,7 +16,7 @@ import models.UserRepository;
  * Servlet implementation class Login
  */
 @WebServlet("/Login")
-public class Login extends HttpServlet {
+public class Login extends ServletAbstract {
 	private static final long serialVersionUID = 1L;
        
 	private UserRepository user; 
@@ -63,11 +54,10 @@ public class Login extends HttpServlet {
 		if (user != null){
 			session.setAttribute("user", user);	
 			session.setAttribute("logged", true);
-
-			this.getServletContext().getRequestDispatcher("/WEB-INF/Login/index.jsp").forward(request, response);
+			super.displayLayout("/WEB-INF/Login/index.jsp", request, response);
 		}
 		else {
-			this.getServletContext().getRequestDispatcher("/WEB-INF/Home/index.jsp").forward(request, response);
+			super.displayLayout("/WEB-INF/Home/index.jsp", request, response);
 		}	
 	}
 

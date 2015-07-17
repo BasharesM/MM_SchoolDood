@@ -16,15 +16,15 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/home/mdk/Bureau/apache-tomcat-7.0.39/lib/jstl-1.1.jar"/>
-	<classpathentry kind="lib" path="/home/mdk/Bureau/apache-tomcat-7.0.39/lib/standard.jar"/>
-	<classpathentry kind="lib" path="/home/mdk/Bureau/apache-tomcat-7.0.39/lib/mysql-connector-java-5.1.36-bin.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Michel/workspace/MM_SchoolDood/lib/externals/jstl-1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Michel/workspace/MM_SchoolDood/lib/externals/standard.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Michel/workspace/MM_SchoolDood/lib/externals/mysql-connector-java-5.1.36-bin.jar"/>
 	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/home/mdk/Bureau/apache-tomcat-7.0.39/lib/commons-codec-1.10.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Michel/workspace/MM_SchoolDood/lib/externals/commons-codec-1.10.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

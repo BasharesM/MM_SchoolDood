@@ -13,7 +13,7 @@ import utils.MysqlDriver;
  * Servlet implementation class Home
  */
 @WebServlet("/Home")
-public class Home extends HttpServlet {
+public class Home extends ServletAbstract {
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -29,8 +29,8 @@ public class Home extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		// response.getWriter().append("Served at: ").append(request.getContextPath());		
-		this.getServletContext().getRequestDispatcher("/WEB-INF/Home/index.jsp").include(request, response);
+		// response.getWriter().append("Served at: ").append(request.getContextPath());
+		super.displayLayout("/WEB-INF/Home/index.jsp", request, response);
 	}
 
 	/**

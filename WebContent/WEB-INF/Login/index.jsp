@@ -12,6 +12,8 @@
 <% User user = (User) request.getSession().getAttribute("user"); %>
 <%= user.getFirst_name() %>
 
+<a href="/MM_SchoolDood/Email" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+
 <a href="/MM_SchoolDood/logout">Déconnexion</a>
 </body>
 </html>
