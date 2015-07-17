@@ -23,10 +23,10 @@ public class MysqlDriver {
     }
     
     private MysqlDriver()
-    {
-        this.server = "localhost:3306";
-        this.user = "root";
-        this.password = "root";
+    {	    
+        this.server = "37.187.111.99";
+        this.user = "java";
+        this.password = "admin";
         this.database = "school_doodle";
         
         init();
