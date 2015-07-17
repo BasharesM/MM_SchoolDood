@@ -1,23 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c_rt" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-<link rel="stylesheet" href="/MM_SchoolDood/static/css/material.min.css">
-</head>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+		<title>School Dood ! Merci de vous identifier</title>
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/materialize.min.css" type="text/css" media="screen, projection" />
+	</head>
 <body>
 
-
-	<form method="post" action="/MM_SchoolDood/login">
-		<label for="username">Pseudo : </label>
-		<input type="text" name="username"/>
-		<label for="password">Password : </label>
-		<input type="text" name="password"/>
-		<input type="submit" value="S'inscrire"/>
-	</form>
+<div class="row">
+	<div class="col m4 offset-m4">
+			<form method="post" action="/MM_SchoolDood/login">
+			<label for="username">Pseudo : </label>
+			<input type="text" name="username"/>
+			<label for="password">Password : </label>
+			<input type="text" name="password"/>
+			<input type="submit" value="S'inscrire"/>
+		</form>
+	</div>
+</div>
 
 
 
@@ -30,6 +33,7 @@
 <% } %>
 
 
-<script src="/MM_SchoolDood/static/js/material.min.js"></script>
+<script src="/MM_SchoolDood/static/js/jquery-2.1.4.min.js"></script>
+<script src="/MM_SchoolDood/static/js/materialize.min.js"></script>
 </body>
 </html>
