@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import librairies.SendHTMLEmail;
 import utils.MysqlDriver;
 
 /**
@@ -29,6 +30,9 @@ public class Home extends ServletAbstract {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		//SendHTMLEmail mail = new SendHTMLEmail();
+		//mail.sendMail("michel.bashares@gmail.com", "salut salut");
+		
 		super.displayLayout("/WEB-INF/Home/index.jsp", request, response);
 	}
 
