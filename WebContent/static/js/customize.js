@@ -19,21 +19,5 @@ $(document).ready(function() {
     	        selectMonths: true, // Creates a dropdown to control month
     	        selectYears: 2 // Creates a dropdown of 15 years to control year
     	  });
-    });
-    
-    
-    // Gestion des boutons de formulaire sur la home
-    $('#login').click(function() {
-    	$('#loginForm').submit();
-    });
-    
-    $('#signup').click(function() {
-    	$('#signupForm').submit();
-    });
-    
-    // Gestion du bouton du formulaire d'ajout d'un email
-    $('#addEmail').click(function() {
-    	$('#addEmailForm').submit();
-    });
-   
+    });   
 });
