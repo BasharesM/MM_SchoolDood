@@ -6,7 +6,10 @@ import org.apache.commons.codec.digest.DigestUtils;
 
 import com.mysql.jdbc.PreparedStatement;
 
+import entities.CategoryAnswer;
+import entities.CategoryAnswers;
 import entities.Email;
+import entities.Emails;
 import entities.User;
 
 public class EmailRepository extends AbstractRepository {
@@ -47,4 +50,31 @@ public class EmailRepository extends AbstractRepository {
 		return false;
 	}
 
+	public Emails findAllById(int uid) {
+		try {
+ 	        
+			String sql = "select * from `"+ this.table_name +"` where uid=? " ;
+		        		
+			PreparedStatement preparedStatement =
+					(PreparedStatement) this.connexion.prepareStatement(sql);
+
+			preparedStatement.setInt(1, uid);
+			
+			ResultSet item = preparedStatement.executeQuery();
+
+			Emails emails = new Emails();
+			
+			while (item.next()){
+				Email email = new Email(Integer.parseInt(item.getString("eid")), Integer.parseInt(item.getString("uid")), item.getString("email"));
+								
+				emails.push(email);
+			}
+			
+			return emails;
+		} catch (Exception e) {
+			System.err.println(e.toString());
+		}
+		
+		return null;		
+	}
 }
