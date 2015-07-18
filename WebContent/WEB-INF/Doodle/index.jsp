@@ -8,12 +8,12 @@
 
 <div class="row">
 	<div class="card blue lighten-5 col m4 offset-m4">
-		<form method="post" action="/MM_SchoolDood/login">
-			<div class="input-field col m12">
+		<form method="post" action="/MM_SchoolDood/Doodle">
+			<div class="input-field m12">
+				<input type="text" name="question"/>
 				<label for="question">Question</label>
-				<input type="text" id="question" name="question"/>
 			</div>
-			<div class="col m12">
+			<div class="m12">
 				<label for="caid">Type de réponse</label>	
 				<select class="browser-default" id="caid" name="caid">
 					<% for(int i = 0 ; i < categories.size() ; i++) { 
@@ -23,7 +23,7 @@
 					<% } %>
 				</select>			
 			</div>
-			<div class="input-field col m12">
+			<div class=" m12">
 				<p>
 		      	<input type="checkbox" name="status" id="status" />
 		      	<label for="status">Privé</label>
