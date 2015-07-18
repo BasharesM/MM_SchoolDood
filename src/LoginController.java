@@ -54,7 +54,7 @@ public class LoginController extends ServletAbstract {
 		if (user != null){
 			session.setAttribute("user", user);	
 			session.setAttribute("logged", true);
-			super.displayLayout("/WEB-INF/Login/index.jsp", request, response);
+			super.displayLayout("/WEB-INF/Login/index.jsp", request, response, "Bonjour "+user.getFirst_name());
 		}
 		else {
 			super.displayLayout("/WEB-INF/Home/index.jsp", request, response, "loginError");

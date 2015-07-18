@@ -48,7 +48,7 @@ public class ServletAbstract extends HttpServlet {
 	protected void displayLayout(String jsp, HttpServletRequest request, HttpServletResponse response, String messageFlash) throws ServletException, IOException {
 		if(messageFlash != "") {
 			request.setAttribute("messageFlash", true);
-			request.setAttribute("message", messageFlash);
+			request.setAttribute("flash", messageFlash);
 		}
 		
 		this.getServletContext().getRequestDispatcher("/WEB-INF/header.jsp").include(request, response);

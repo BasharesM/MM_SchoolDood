@@ -40,23 +40,7 @@
 	      <div class="col s12 m5">
 	        <div class="card-panel teal">
 	          <span class="white-text">
-	          
-	            <%
-					if (request.getAttribute("message") == "logout") {
-				%>
-					Déconnexion réussie.
-				<%
-					}
-				%>
-				
-				<%
-					if (request.getAttribute("message") == "loginError") {
-				%>
-					Identifiants incorrects.
-				<%
-					}
-				%>
-	          	
+	          	<%= request.getAttribute("flash") %>	          	
 	          </span>
 	        </div>
 	      </div>
