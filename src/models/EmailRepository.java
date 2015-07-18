@@ -50,7 +50,7 @@ public class EmailRepository extends AbstractRepository {
 		return false;
 	}
 
-	public Emails findAllById(int uid) {
+	public Emails findAllByUserId(int uid) {
 		try {
  	        
 			String sql = "select * from `"+ this.table_name +"` where uid=? " ;

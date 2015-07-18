@@ -49,7 +49,7 @@ public class Doodle extends HttpServlet {
 			return;
 		}
 		CategoryAnswers categories = this.answer_categories.findAll();
-		Emails emails = this.emails.findAllById(user.getUid());
+		Emails emails = this.emails.findAllByUserId(user.getUid());
 		
 		request.setAttribute("categories", categories);
 		request.setAttribute("emails", emails);
