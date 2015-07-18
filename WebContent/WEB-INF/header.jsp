@@ -24,6 +24,7 @@
 				<% if (user != null) { %>
 				
 				<ul class="right hide-on-med-and-down">
+					<li><a href="/MM_SchoolDood/Doodle">Nouveau Doodle</a></li>
 					<li><a href="/MM_SchoolDood/Email">Liste des emails</a></li>
 					<li><a href="/MM_SchoolDood/logout"><%= user.getFirst_name() %><i class="material-icons right">power_settings_new</i></a></li>
 				</ul>
