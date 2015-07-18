@@ -2,6 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c_rt" %>
 <%@ page import="entities.CategoryAnswers" %>
 <%@ page import="entities.CategoryAnswer" %>
+<%@ page import="entities.Emails" %>
+<%@ page import="entities.Email" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -12,6 +14,7 @@
 <body>
 
 <% CategoryAnswers categories = (CategoryAnswers) request.getAttribute("categories"); %>
+<% Emails emails = (Emails) request.getAttribute("emails"); %>
 
 <div class="row">
 	<div class="col m4 offset-m4">
@@ -56,7 +59,17 @@
 		    	
 				<a id="new-datetime" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
 			</div>
-			
+			<div class="row">
+				<% for (int j = 0 ; j < emails.size() ; j++) { %>
+					<% Email email = emails.get(j); %>
+					<div class="col m6">
+						<p>
+							<input type="checkbox" name="emails[]" id="email-<%= email.getEid() %>" value="<%= email.getEid() %>"/>
+							<label for="email-<%= email.getEid() %>"><%= email.getEmail() %></label>
+						</p>
+					</div>
+				<% } %>
+			</div>
 			<button type="submit" class="btn waves-effect waves-light" value="S'inscrire">
 				Créer<i class="material-icons"></i>
 			</button>

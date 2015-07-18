@@ -50,7 +50,7 @@ public class Doodle extends ServletAbstract {
 		request.setAttribute("categories", categories);
 		request.setAttribute("emails", emails);
 		
-		this.getServletContext().getRequestDispatcher("/WEB-INF/Doodle/index.jsp").include(request, response);
+		super.displayLayout("/WEB-INF/Doodle/index.jsp", request, response);
 	}
 
 	/**
