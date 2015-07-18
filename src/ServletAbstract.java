@@ -62,4 +62,23 @@ public class ServletAbstract extends HttpServlet {
 		return (User) session.getAttribute("user");
 	}
 
+	protected boolean accessControl(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession(true);
+		
+		if (session.getAttribute("logged") == null) {
+
+			try {
+				this.displayLayout("/WEB-INF/Home/index.jsp", request, response);
+				return false;
+			} catch (ServletException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+		}
+		
+		return true;
+	}
 }

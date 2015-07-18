@@ -19,7 +19,7 @@ import models.EmailRepository;
  * Servlet implementation class Doodle
  */
 @WebServlet("/Doodle")
-public class Doodle extends HttpServlet {
+public class Doodle extends ServletAbstract {
 	private static final long serialVersionUID = 1L;
 		
 	private CategoryAnswerRepository answer_categories;
@@ -40,16 +40,12 @@ public class Doodle extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		HttpSession session = request.getSession(true);
-		User user = (User) session.getAttribute("user");
-		
-		if (session.getAttribute("logged") == null) {
-
-			this.getServletContext().getRequestDispatcher("/WEB-INF/Home/index.jsp").forward(request, response);
+		if (!super.accessControl(request, response)) {
 			return;
 		}
+		
 		CategoryAnswers categories = this.answer_categories.findAll();
-		Emails emails = this.emails.findAllByUserId(user.getUid());
+		Emails emails = this.emails.findAllByUserId(super.getCurrentUser(request, response).getUid());
 		
 		request.setAttribute("categories", categories);
 		request.setAttribute("emails", emails);
