@@ -8,19 +8,31 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import entities.CategoryAnswer;
+import entities.CategoryAnswers;
+import entities.Emails;
+import entities.User;
+import models.CategoryAnswerRepository;
+import models.EmailRepository;
+
 /**
- * Servlet implementation class Logout
+ * Servlet implementation class Doodle
  */
-@WebServlet("/Logout")
-public class Logout extends ServletAbstract {
+@WebServlet("/Doodle")
+public class DoodleController extends ServletAbstract {
 	private static final long serialVersionUID = 1L;
-       
+		
+	private CategoryAnswerRepository answer_categories;
+	private EmailRepository emails;
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Logout() {
+    public DoodleController() {
         super();
-        // TODO Auto-generated constructor stub
+        
+        this.emails = new EmailRepository();
+		this.answer_categories = new CategoryAnswerRepository();
     }
 
 	/**
@@ -28,12 +40,17 @@ public class Logout extends ServletAbstract {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		if (!super.accessControl(request, response)) {
+			return;
+		}
 		
-		// On détruit la session
-		HttpSession session = request.getSession(true);
-		session.invalidate();
+		CategoryAnswers categories = this.answer_categories.findAll();
+		Emails emails = this.emails.findAllByUserId(super.getCurrentUser(request, response).getUid());
 		
-		super.displayLayout("/WEB-INF/Home/index.jsp", request, response, "logout");
+		request.setAttribute("categories", categories);
+		request.setAttribute("emails", emails);
+		
+		super.displayLayout("/WEB-INF/Doodle/index.jsp", request, response);
 	}
 
 	/**
@@ -41,7 +58,6 @@ public class Logout extends ServletAbstract {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
 		doGet(request, response);
 	}
 

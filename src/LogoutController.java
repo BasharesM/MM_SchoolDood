@@ -1,7 +1,6 @@
 
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,24 +8,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import entities.User;
-import models.UserRepository;
-
 /**
- * Servlet implementation class Login
+ * Servlet implementation class Logout
  */
-@WebServlet("/Login")
-public class Login extends ServletAbstract {
+@WebServlet("/Logout")
+public class LogoutController extends ServletAbstract {
 	private static final long serialVersionUID = 1L;
        
-	private UserRepository user; 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Login() {
+    public LogoutController() {
         super();
-        
-        this.user = new UserRepository();
         // TODO Auto-generated constructor stub
     }
 
@@ -35,7 +28,12 @@ public class Login extends ServletAbstract {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		// response.getWriter().append("Served adsdt: ").append(request.getContextPath());
+		
+		// On détruit la session
+		HttpSession session = request.getSession(true);
+		session.invalidate();
+		
+		super.displayLayout("/WEB-INF/Home/index.jsp", request, response, "logout");
 	}
 
 	/**
@@ -43,22 +41,8 @@ public class Login extends ServletAbstract {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
 		
-		HttpSession session = request.getSession(true);
-		
-		User user = this.user.login(username, password);
-		
-		if (user != null){
-			session.setAttribute("user", user);	
-			session.setAttribute("logged", true);
-			super.displayLayout("/WEB-INF/Login/index.jsp", request, response);
-		}
-		else {
-			super.displayLayout("/WEB-INF/Home/index.jsp", request, response, "loginError");
-		}	
+		doGet(request, response);
 	}
 
 }

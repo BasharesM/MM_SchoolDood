@@ -14,13 +14,13 @@ import utils.MysqlDriver;
  * Servlet implementation class Home
  */
 @WebServlet("/Home")
-public class Home extends ServletAbstract {
+public class HomeController extends ServletAbstract {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Home() {
+    public HomeController() {
         super();
         // TODO Auto-generated constructor stub
     }

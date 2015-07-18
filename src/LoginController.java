@@ -1,6 +1,7 @@
 
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,31 +9,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import entities.CategoryAnswer;
-import entities.CategoryAnswers;
-import entities.Emails;
 import entities.User;
-import models.CategoryAnswerRepository;
-import models.EmailRepository;
+import models.UserRepository;
 
 /**
- * Servlet implementation class Doodle
+ * Servlet implementation class Login
  */
-@WebServlet("/Doodle")
-public class Doodle extends ServletAbstract {
+@WebServlet("/Login")
+public class LoginController extends ServletAbstract {
 	private static final long serialVersionUID = 1L;
-		
-	private CategoryAnswerRepository answer_categories;
-	private EmailRepository emails;
-	
+       
+	private UserRepository user; 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Doodle() {
+    public LoginController() {
         super();
         
-        this.emails = new EmailRepository();
-		this.answer_categories = new CategoryAnswerRepository();
+        this.user = new UserRepository();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -40,17 +35,7 @@ public class Doodle extends ServletAbstract {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		if (!super.accessControl(request, response)) {
-			return;
-		}
-		
-		CategoryAnswers categories = this.answer_categories.findAll();
-		Emails emails = this.emails.findAllByUserId(super.getCurrentUser(request, response).getUid());
-		
-		request.setAttribute("categories", categories);
-		request.setAttribute("emails", emails);
-		
-		super.displayLayout("/WEB-INF/Doodle/index.jsp", request, response);
+		// response.getWriter().append("Served adsdt: ").append(request.getContextPath());
 	}
 
 	/**
@@ -58,7 +43,22 @@ public class Doodle extends ServletAbstract {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		
+		HttpSession session = request.getSession(true);
+		
+		User user = this.user.login(username, password);
+		
+		if (user != null){
+			session.setAttribute("user", user);	
+			session.setAttribute("logged", true);
+			super.displayLayout("/WEB-INF/Login/index.jsp", request, response);
+		}
+		else {
+			super.displayLayout("/WEB-INF/Home/index.jsp", request, response, "loginError");
+		}	
 	}
 
 }
