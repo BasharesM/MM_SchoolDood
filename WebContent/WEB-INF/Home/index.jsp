@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col s12 m6">
 		<div class="card blue lighten-5">
-		<form method="post" action="/MM_SchoolDood/user/register">
+		<form id="signupForm" method="post" action="/MM_SchoolDood/user/register">
 			<div class="card-content black-text">
 				<span class="card-title black-text" style="margin-bottom: 10px;">Inscription</span>
 				<div style="margin-top: 10px;">
@@ -16,7 +16,7 @@
 				</div>
 			</div>
 			<div class="card-action right-align">
-				<input type="submit" class="waves-effect waves-light btn" value="S'inscrire" />
+				<a href="#" id="signup" class="waves-effect waves-light btn">S'inscrire</a>
 			</div>
 			</form>
 		</div>
@@ -24,7 +24,7 @@
 
 	<div class="col s12 m6">
 		<div class="card blue lighten-5">
-		<form method="post" action="/MM_SchoolDood/login">
+		<form id="loginForm" method="post" action="/MM_SchoolDood/login">
 			<div class="card-content black-text">
 				<span class="card-title black-text">Connexion</span>
 				<div style="margin-top: 10px;">
@@ -37,7 +37,7 @@
 				</div>
 			</div>
 			<div class="card-action right-align">
-			<input type="submit" class="waves-effect waves-light btn" value="Se connecter" />
+			<a href="#" id="login" class="waves-effect waves-light btn">Se connecter</a>
 			</div>
 			</form>
 		</div>
