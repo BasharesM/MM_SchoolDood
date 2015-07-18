@@ -2,6 +2,8 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c_rt"%>
 
+<%@ page import="entities.User" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +12,7 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/static/css/materialize.min.css"
 	type="text/css" media="screen, projection" />
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
 
@@ -17,13 +20,14 @@
 		<div class="container">
 			<div class="nav-wrapper">
 				<a href="${pageContext.request.contextPath}/home" class="brand-logo">School Dood</a>
+				<% User user = (User) request.getSession().getAttribute("user"); %>
+				<% if (user != null) { %>
+				
 				<ul class="right hide-on-med-and-down">
-					<li><a href="sass.html">Sass</a></li>
-					<li><a href="badges.html">Components</a></li>
-					<!-- Dropdown Trigger -->
-					<li><a class="dropdown-button" href="#!"
-						data-activates="dropdown1">Dropdown</a></li>
+					<li><a href="/MM_SchoolDood/Email">Liste des emails</a></li>
+					<li><a href="/MM_SchoolDood/logout"><%= user.getFirst_name() %><i class="material-icons right">power_settings_new</i></a></li>
 				</ul>
+				<% } %>
 			</div>
 		</div>
 	</nav>
