@@ -30,5 +30,10 @@ $(document).ready(function() {
     $('#signup').click(function() {
     	$('#signupForm').submit();
     });
+    
+    // Gestion du bouton du formulaire d'ajout d'un email
+    $('#addEmail').click(function() {
+    	$('#addEmailForm').submit();
+    });
    
 });
