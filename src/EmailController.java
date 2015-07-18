@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import entities.CategoryAnswers;
+import entities.Emails;
 import entities.User;
 import models.EmailRepository;
 
@@ -37,6 +39,10 @@ public class EmailController extends ServletAbstract {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
+		Emails emails = this.email.findAllByUserId(super.getCurrentUser(request, response).getUid());
+		
+		request.setAttribute("emails", emails);
+		
 		// Arrivée depuis le bouton 'Ajouter un email'
 		super.displayLayout("/WEB-INF/Email/index.jsp", request, response);
 	}
@@ -52,7 +58,7 @@ public class EmailController extends ServletAbstract {
 		String email = request.getParameter("email");
 		
 		if(this.email.insert(user.getUid(), email)) {
-			System.out.println("ok");
+			this.doGet(request, response);
 		}
 	}
 
