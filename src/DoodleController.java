@@ -13,12 +13,14 @@ import javax.servlet.http.HttpSession;
 import entities.Answers;
 import entities.CategoryAnswer;
 import entities.CategoryAnswers;
+import entities.Dates;
 import entities.Doodle;
 import entities.Emails;
 import entities.User;
 import librairies.SendHTMLEmail;
 import models.AnswerRepository;
 import models.CategoryAnswerRepository;
+import models.DateRepository;
 import models.DoodleRepository;
 import models.EmailRepository;
 
@@ -33,6 +35,8 @@ public class DoodleController extends ServletAbstract {
 	private EmailRepository emails;
 	private DoodleRepository doodle;
 	private AnswerRepository answer;
+	private DateRepository date;
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -43,6 +47,7 @@ public class DoodleController extends ServletAbstract {
 		this.answer_categories = new CategoryAnswerRepository();
 		this.doodle = new DoodleRepository();
 		this.answer = new AnswerRepository();
+		this.date = new DateRepository();
     }
   
 	/**
@@ -58,10 +63,12 @@ public class DoodleController extends ServletAbstract {
 				return;
 			}
 			
-			Answers answers = this.answer.findAnswersByCatAnswerId(doodle.getCaid());
-
+			Answers answers = this.answer.findAllByCatId(doodle.getCaid());
+			Dates dates = this.date.findAllByDoodleId(doodle.getDid());
+			
 			request.setAttribute("doodle", doodle);
 			request.setAttribute("answers", answers);
+			request.setAttribute("dates", dates);
 			
 			if (doodle.getStatus() == 0) {
 				super.displayLayout("/WEB-INF/Doodle/show.jsp", request, response);

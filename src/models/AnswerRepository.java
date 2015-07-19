@@ -13,13 +13,13 @@ public class AnswerRepository extends AbstractRepository{
 		super("answers");
 	}
 	
-	public Answers findAnswersByCatAnswerId(int caid) {
+	public Answers findAllByCatId(int caid) {
 		try {
 			String sql = "SELECT * FROM answers WHERE caid=?;" ;
     		
 			PreparedStatement preparedStatement =
 					(PreparedStatement) this.connexion.prepareStatement(sql);
-						
+			
 			preparedStatement.setInt(1, caid);
 			
 			ResultSet item = preparedStatement.executeQuery();
@@ -30,6 +30,7 @@ public class AnswerRepository extends AbstractRepository{
 			while (item.next()) {
 				answer = new Answer(
 							Integer.parseInt(item.getString("aid")), 
+							Integer.parseInt(item.getString("caid")),
 							Integer.parseInt(item.getString("caid")),
 							item.getString("label"));
 				
