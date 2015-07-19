@@ -12,8 +12,10 @@ import javax.servlet.http.HttpSession;
 
 import entities.CategoryAnswer;
 import entities.CategoryAnswers;
+import entities.Doodle;
 import entities.Emails;
 import entities.User;
+import librairies.SendHTMLEmail;
 import models.CategoryAnswerRepository;
 import models.DoodleRepository;
 import models.EmailRepository;
@@ -38,16 +40,44 @@ public class DoodleController extends ServletAbstract {
 		this.answer_categories = new CategoryAnswerRepository();
 		this.doodle = new DoodleRepository();
     }
-
+  
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		if (!super.accessControl(request, response)) {
+		if (request.getParameter("did") != null) {
+			Doodle doodle = this.doodle.findById(Integer.parseInt(request.getParameter("did")));
+			
+			if (doodle == null) {		
+				super.displayLayout("/WEB-INF/Home/index.jsp", request, response);
+				return;
+			}
+			
+			if (doodle.getStatus() == 0) {
+				super.displayLayout("/WEB-INF/Doodle/show.jsp", request, response);
+				return;
+			}
+			
+			if (doodle.getStatus() == 1) {
+				if (request.getParameter("token") != null && doodle.getToken().compareTo(request.getParameter("token")) == 0){
+					super.displayLayout("/WEB-INF/Doodle/show.jsp", request, response);
+					return;
+				}
+				else{
+					super.displayLayout("/WEB-INF/Home/index.jsp", request, response, "Ce doodle est privé et vous n'y avez pas accès.");
+					return;
+				}
+			}
+			
+			super.displayLayout("/WEB-INF/Home/index.jsp", request, response, "Statut invalide");
 			return;
 		}
 		
+		if (!super.accessControl(request, response)) {
+			return;
+		}
+				
 		CategoryAnswers categories = this.answer_categories.findAll();
 		Emails emails = this.emails.findAllByUserId(super.getCurrentUser(request, response).getUid());
 		
@@ -100,9 +130,45 @@ public class DoodleController extends ServletAbstract {
         if (checkbox == null || checkbox.compareTo("off") == 0) {
         	status = 0;
         }
+       
+		String[] emailsParams = request.getParameterValues("emails[]");
+		
+        if (emailsParams == null){
+        	request.setAttribute("message",  "Vous devez inviter au moins une personne.");
+        	this.doGet(request, response);
+        	return;
+        }
         
-        if (this.doodle.save(super.getCurrentUser(request, response).getUid(), Integer.parseInt(request.getParameter("caid")), status, request.getParameter("question"))) {
-			request.setAttribute("message", "Doodle ajouté !");
+        String question = (String) request.getParameter("question");
+		
+        int id = this.doodle.save(super.getCurrentUser(request, response).getUid(), Integer.parseInt(request.getParameter("caid")), status, question);
+
+        if (id != 0) {
+        	Doodle doodle = this.doodle.findById(id);
+        	
+        	String url = request.getRequestURL().toString() + "?did=" + String.valueOf(doodle.getDid()) + "&token=" + doodle.getToken();
+        	System.out.println(url);
+    		SendHTMLEmail mailer = new SendHTMLEmail();
+        	for (int i = 0 ; i < emailsParams.length ; i++) {
+        		String content = "<html>"
+        				+ "<head><title></title>"
+        				+ "</head>"
+        				+ "<body>"
+        				+ "<h1>" + question + "</h1>"
+        				+ "<p>Vous venez de recevoir un doodle ! Répondez à cette adresse : "
+        				+ "<a href=\"" 
+        				+ url
+        				+ "\">"
+        				+ url
+        				+ "</a>"
+        				+ "<p>A bientôt ! </p>"
+        				+ "</body>"
+        				+ "</html>";
+        		System.out.println(emailsParams[i]);
+        		mailer.sendMail(emailsParams[i], content);
+        	}
+        	
+        	request.setAttribute("message", "Doodle ajouté !");
 			
 			this.doGet(request, response);
         }
