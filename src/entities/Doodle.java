@@ -5,9 +5,9 @@ public class Doodle {
 	private int did;
 	private int uid;
 	private int caid;
+	private int status;
 	private String question;
 	private String token;
-	private boolean status;
 	
 	public Doodle() {
 		this.did = 0;
@@ -15,10 +15,10 @@ public class Doodle {
 		this.question = "";
 		this.caid = 0;
 		this.token = "";
-		this.status = false;
+		this.status = 0;
 	}
 	
-	public Doodle(int did, int uid, int caid, boolean status, String question, String token) {
+	public Doodle(int did, int uid, int caid, int status, String question, String token) {
 		this.did = did;
 		this.uid = uid;
 		this.question = question;
@@ -67,11 +67,11 @@ public class Doodle {
 		this.token = token;
 	}
 
-	public boolean isStatus() {
+	public int getStatus() {
 		return status;
 	}
 
-	public void setStatus(boolean status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 }
