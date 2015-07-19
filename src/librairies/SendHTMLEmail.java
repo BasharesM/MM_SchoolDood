@@ -24,8 +24,8 @@ public class SendHTMLEmail
         // Create a mail session
         Properties properties = new Properties();
         properties.put("mail.transport.protocol", "smtp");
-        properties.put("mail.smtp.host", "example.com");
-        properties.put("mail.smtp.port", "25");
+        properties.put("mail.smtp.host", "smtp.gmail.com");
+        properties.put("mail.smtp.port", "587");
         properties.put("mail.smtp.username", user);
         properties.put("mail.smtp.password", password);
         Session session = Session.getDefaultInstance(properties, null);
@@ -36,7 +36,7 @@ public class SendHTMLEmail
             message.setFrom(new InternetAddress(fromAddress));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toAddress));
 
-            message.setSubject("Invitation à un SchoolDood");
+            message.setSubject("Invitation ï¿½ un SchoolDood");
             message.setText(content);
             Transport.send(message);
 
