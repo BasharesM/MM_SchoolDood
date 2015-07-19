@@ -8,7 +8,7 @@
 
 <h1><c:out value="${doodle['question']}" /></h1>
 
-<form method="post" action="">
+<form method="post" action="/MM_SchoolDood/reply">
 	<div class="row">
 		<div class="input-field">
 			<input type="text" id="name" name="name"/>
@@ -21,7 +21,7 @@
 			<c:forEach var="i" begin="0" end="${dates.size()-1}">
 				<c:set scope="request" var="date" value="${dates.get(i)}" />
 				<p>
-		      		<input name="date" type="radio" id="date-<c:out value="${date.getDaid()}"/>" />
+		      		<input name="daid" type="radio" value="<c:out value="${date.getDaid()}"/>" id="date-<c:out value="${date.getDaid()}"/>" />
 		      		<label for="date-<c:out value="${date.getDaid()}"/>"><c:out value="${date.getDate()}"/></label>
 		    	</p>
 			</c:forEach>
@@ -30,7 +30,7 @@
 			<c:forEach var="i" begin="0" end="${answers.size()-1}">
 				<c:set scope="request" var="answer" value="${answers.get(i)}" />
 				<p>
-		      		<input name="answer" type="radio" id="answer-<c:out value="${answer.getAid()}"/>" />
+		      		<input name="aid" type="radio" value="<c:out value="${answer.getAid()}"/>" id="answer-<c:out value="${answer.getAid()}"/>" />
 		      		<label for="answer-<c:out value="${answer.getAid()}"/>"><c:out value="${answer.getLabel()}"/></label>
 		    	</p>
 			</c:forEach>

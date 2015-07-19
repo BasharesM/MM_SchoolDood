@@ -19,15 +19,23 @@
   <servlet-mapping>
     <servlet-name>Doodle</servlet-name>
     <url-pattern>/Doodle/*</url-pattern>
-  </servlet-mapping>	
+  </servlet-mapping>
   <servlet>
     <servlet-name>UserController</servlet-name>
     <servlet-class>UserController</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>UserController</servlet-name>
-   	<url-pattern>/user/register</url-pattern>
- </servlet-mapping>
+    <servlet-name>UserController</servlet-name>
+    <url-pattern>/user/register</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>UserDoodleController</servlet-name>
+    <servlet-class>UserDoodleController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserDoodleController</servlet-name>
+    <url-pattern>/reply</url-pattern>
+  </servlet-mapping>
   <servlet>
     <servlet-name>Login</servlet-name>
     <servlet-class>LoginController</servlet-class>
