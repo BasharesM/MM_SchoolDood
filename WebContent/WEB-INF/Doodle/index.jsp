@@ -67,7 +67,7 @@
 					<% Email email = emails.get(j); %>
 					<div class="col m6 input-field c">
 						<p>
-							<input type="checkbox" name="emails[]" id="email-<%= email.getEid() %>" value="<%= email.getEid() %>"/>
+							<input type="checkbox" name="emails[]" id="email-<%= email.getEid() %>" value="<%= email.getEmail() %>"/>
 							<label for="email-<%= email.getEid() %>"><%= email.getEmail() %></label>
 						</p>
 					</div>
