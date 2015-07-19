@@ -4,6 +4,7 @@
 
 <c:set scope="request" var="doodle" value="${doodle}" />
 <c:set scope="request" var="answers" value="${answers}" />
+<c:set scope="request" var="dates" value="${dates}" />
 
 <h1><c:out value="${doodle['question']}" /></h1>
 
@@ -15,14 +16,26 @@
 		</div>
 	</div>
 	
-	<c:forEach var="i" begin="0" end="${answers.size()-1}">
-		<c:set scope="request" var="answer" value="${answers.get(i)}" />
-		
-		<p>
-      		<input name="answer" type="radio" id="answer<c:out value="${answer.getAid()}"/>" />
-      		<label for="answer<c:out value="${answer.getAid()}"/>"><c:out value="${answer.getLabel()}"/></label>
-    	</p>
-	</c:forEach>
+	<div class="row">
+		<div class="col m6">
+			<c:forEach var="i" begin="0" end="${dates.size()-1}">
+				<c:set scope="request" var="date" value="${dates.get(i)}" />
+				<p>
+		      		<input name="date" type="radio" id="date-<c:out value="${date.getDaid()}"/>" />
+		      		<label for="date-<c:out value="${date.getDaid()}"/>"><c:out value="${date.getDate()}"/></label>
+		    	</p>
+			</c:forEach>
+		</div>
+		<div class="col m6">
+			<c:forEach var="i" begin="0" end="${answers.size()-1}">
+				<c:set scope="request" var="answer" value="${answers.get(i)}" />
+				<p>
+		      		<input name="answer" type="radio" id="answer-<c:out value="${answer.getAid()}"/>" />
+		      		<label for="answer-<c:out value="${answer.getAid()}"/>"><c:out value="${answer.getLabel()}"/></label>
+		    	</p>
+			</c:forEach>
+		</div>	
+	</div>
 		
 	<input type="hidden" name="did" value="<c:out value="${doodle['did']}"/>"/>
 	<input type="hidden" name="token" value="<c:out value="${doodle['token']}"/>"/>
