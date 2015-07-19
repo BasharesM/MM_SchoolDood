@@ -16,6 +16,10 @@
     <servlet-name>Doodle</servlet-name>
     <servlet-class>DoodleController</servlet-class>
   </servlet>
+  <servlet-mapping>
+    <servlet-name>Doodle</servlet-name>
+    <url-pattern>/Doodle/*</url-pattern>
+  </servlet-mapping>	
   <servlet>
     <servlet-name>UserController</servlet-name>
     <servlet-class>UserController</servlet-class>
