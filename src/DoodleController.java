@@ -119,7 +119,7 @@ public class DoodleController extends ServletAbstract {
         {
         	 String paramName = (String)paramNames.nextElement();
              String[] paramValues = request.getParameterValues(paramName);
-             System.out.println("+ "+paramName);
+             System.out.println(paramValues);
              /*
              if (paramValues.length == 1) 
              {

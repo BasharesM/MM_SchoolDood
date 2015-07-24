@@ -52,4 +52,12 @@
     <servlet-name>Logout</servlet-name>
     <url-pattern>/logout</url-pattern>
   </servlet-mapping>
+    <servlet>
+    <servlet-name>ListDoodleController</servlet-name>
+    <servlet-class>ListDoodleController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListDoodleController</servlet-name>
+    <url-pattern>/list-doodles</url-pattern>
+  </servlet-mapping>
 </web-app>
