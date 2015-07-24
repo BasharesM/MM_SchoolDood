@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import entities.Answers;
 import entities.CategoryAnswer;
 import entities.CategoryAnswers;
+import entities.Date;
 import entities.Dates;
 import entities.Doodle;
 import entities.Emails;
@@ -114,32 +115,6 @@ public class DoodleController extends ServletAbstract {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Enumeration paramNames = request.getParameterNames();
-        while(paramNames.hasMoreElements()) 
-        {
-        	 String paramName = (String)paramNames.nextElement();
-             String[] paramValues = request.getParameterValues(paramName);
-             System.out.println("+ "+paramName);
-             /*
-             if (paramValues.length == 1) 
-             {
-                 String paramValue = paramValues[0];
-                 if (paramValue.length() == 0)
-                	 System.out.println("No Value");
-                 else
-                	 System.out.println(paramValue);
-             } 
-             else
-             {
-            	 System.out.println("<ul>");
-                 for(int i=0; i<paramValues.length; i++) 
-                 {
-                	 System.out.println("<li>" + paramValues[i] + "</li>");
-                 }
-                 System.out.println("</ul>");
-             }
-  */
-        }
         int status = 1;
         String checkbox = (String) request.getParameter("status");
         
@@ -160,7 +135,25 @@ public class DoodleController extends ServletAbstract {
         int id = this.doodle.save(super.getCurrentUser(request, response).getUid(), Integer.parseInt(request.getParameter("caid")), status, question);
 
         if (id != 0) {
+            Dates dates = new Dates();
+            
+            String[] hours = request.getParameterValues("datetime[hour][]");
+            String[] minutes = request.getParameterValues("datetime[min][]");
+            String[] date_inputs = request.getParameterValues("datetime[date][]");
+                    
+            Date d = new Date();
+             
+            for(int i=0; i<hours.length; i++) 
+            {
+            	d = new Date(id, hours[i] + ':' + minutes[i], date_inputs[i]);
+            	dates.push(d);
+            }        	
+        	
         	Doodle doodle = this.doodle.findById(id);
+        	
+        	if (!this.date.saveAll(dates)) {
+            	request.setAttribute("message",  "Doodle sauvegardé mais une ou plusieurs dates sont invalides");        		
+        	}
         	
         	String url = request.getRequestURL().toString() + "?did=" + String.valueOf(doodle.getDid()) + "&token=" + doodle.getToken();
         	System.out.println(url);
