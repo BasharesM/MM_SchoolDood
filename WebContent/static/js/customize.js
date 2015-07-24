@@ -6,7 +6,8 @@ $(document).ready(function() {
     $('select').material_select();
     $('.datepicker').pickadate({
         selectMonths: true, // Creates a dropdown to control month
-        selectYears: 2 // Creates a dropdown of 15 years to control year
+        selectYears: 2, // Creates a dropdown of 15 years to control year
+	    format: 'yyyy-mm-dd'
       });
     
     $("#poire").click(function() {
@@ -16,9 +17,12 @@ $(document).ready(function() {
   
     	$(html).appendTo($("#content-datetime"));
 
-    	$('.datepicker').pickadate({
+    	var $input = $('.datepicker').pickadate({
     		selectMonths: true, // Creates a dropdown to control month
-    		selectYears: 2 // Creates a dropdown of 15 years to control year
+    		selectYears: 2, // Creates a dropdown of 15 years to control year
+    	    format: 'yyyy-mm-dd'
     	  });
+    	
+    	
     });   
 });
