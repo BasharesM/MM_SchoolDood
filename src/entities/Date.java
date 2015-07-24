@@ -14,6 +14,12 @@ public class Date {
 		this.heure = "";
 	}
 
+	public Date(int did, String heure, String date){
+		this.date = date;
+		this.heure = heure;
+		this.did = did;
+	}
+	
 	public Date(int daid, int did, String date, String heure) {
 		this.daid = daid;
 		this.did = did;
