@@ -12,6 +12,9 @@ import org.apache.commons.codec.digest.DigestUtils;
 import com.mysql.jdbc.PreparedStatement;
 
 import entities.Doodle;
+import entities.Doodles;
+import entities.Email;
+import entities.Emails;
 
 
 
@@ -86,5 +89,60 @@ public class DoodleRepository extends AbstractRepository{
 		}
 	
 		return null;
+	}
+	
+	/**
+	 * Récupération des doodles d'un utilisateur
+	 * 
+	 * @param uid
+	 * @return doodles
+	 */
+	public Doodles findAllByUserId(int uid) {
+		try {
+			String sql = "select * from doodles where uid=? " ;
+		        		
+			PreparedStatement preparedStatement =
+					(PreparedStatement) this.connexion.prepareStatement(sql);
+
+			preparedStatement.setInt(1, uid);
+			
+			ResultSet item = preparedStatement.executeQuery();
+
+			Doodles doodles = new Doodles();
+			
+			while (item.next()){
+				Doodle doodle = new Doodle(Integer.parseInt(item.getString("did")), Integer.parseInt(item.getString("uid")), Integer.parseInt(item.getString("caid")), Integer.parseInt(item.getString("status")), item.getString("question"), item.getString("token"));
+								
+				doodles.push(doodle);
+			}
+			
+			return doodles;
+		} catch (Exception e) {
+			System.err.println(e.toString());
+		}
+		
+		return null;
+	}
+	
+	/**
+	 * Vérifie si un user est propriétaire d'un doodle
+	 * 
+	 * @param did
+	 * @param uid
+	 * @return boolean
+	 * @throws SQLException
+	 */
+	public boolean checkIfAuthor(int did, int uid) throws SQLException {
+		String sql = "select did from doodles where uid=? and did=? " ;
+	        		
+		PreparedStatement preparedStatement =
+				(PreparedStatement) this.connexion.prepareStatement(sql);
+
+		preparedStatement.setInt(1, uid);
+		preparedStatement.setInt(2, did);
+		
+		ResultSet item = preparedStatement.executeQuery();
+		
+		return item.first();
 	}
 }

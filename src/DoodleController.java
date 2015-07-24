@@ -115,6 +115,33 @@ public class DoodleController extends ServletAbstract {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Enumeration paramNames = request.getParameterNames();
+        while(paramNames.hasMoreElements()) 
+        {
+        	 String paramName = (String)paramNames.nextElement();
+             String[] paramValues = request.getParameterValues(paramName);
+             System.out.println(paramValues);
+             /*
+             if (paramValues.length == 1) 
+             {
+                 String paramValue = paramValues[0];
+                 if (paramValue.length() == 0)
+                	 System.out.println("No Value");
+                 else
+                	 System.out.println(paramValue);
+             } 
+             else
+             {
+            	 System.out.println("<ul>");
+                 for(int i=0; i<paramValues.length; i++) 
+                 {
+                	 System.out.println("<li>" + paramValues[i] + "</li>");
+                 }
+                 System.out.println("</ul>");
+             }
+  */
+        }
+
         int status = 1;
         String checkbox = (String) request.getParameter("status");
         

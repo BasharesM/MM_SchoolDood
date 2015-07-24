@@ -6,6 +6,8 @@ import com.mysql.jdbc.PreparedStatement;
 
 import entities.Answer;
 import entities.Answers;
+import entities.Doodle;
+import entities.Doodles;
 
 public class AnswerRepository extends AbstractRepository{
 
@@ -44,4 +46,33 @@ public class AnswerRepository extends AbstractRepository{
 	
 		return null;
 	}
+	
+//	public String[] getAllByDid(int did) {
+//		try {
+//			String sql = "select count(users_doodle.did) as nb, label, date from users_doodle LEFT JOIN answers USING(aid) LEFT JOIN dates USING(daid) where users_doodle.did=? GROUP BY aid,daid" ;
+//		        		
+//			PreparedStatement preparedStatement =
+//					(PreparedStatement) this.connexion.prepareStatement(sql);
+//
+//			preparedStatement.setInt(1, did);
+//			
+//			ResultSet item = preparedStatement.executeQuery();
+//
+//			String[][] array;
+//			
+//			while (item.next()){
+//				Doodle doodle = new Doodle(Integer.parseInt(item.getString("did")), Integer.parseInt(item.getString("uid")), Integer.parseInt(item.getString("caid")), Integer.parseInt(item.getString("status")), item.getString("question"), item.getString("token"));
+//								
+//				array.push(item.getString("nb"));
+//				array = item.getString("aid");
+//				array = item.getString("daid");
+//			}
+//			
+//			return doodles;
+//		} catch (Exception e) {
+//			System.err.println(e.toString());
+//		}
+//		
+//		return null;
+//	}
 }
