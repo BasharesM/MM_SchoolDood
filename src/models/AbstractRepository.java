@@ -1,6 +1,6 @@
 package models;
 
-import utils.MysqlDriver;
+import librairies.MysqlDriver;
 
 public abstract class AbstractRepository {
 
