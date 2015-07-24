@@ -2,6 +2,7 @@
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +14,7 @@ import entities.Emails;
 import models.DoodleRepository;
 import models.AnswerRepository;
 import entities.Doodles;
+import entities.AnswerResults;
 import entities.Answers;
 
 /**
@@ -33,6 +35,7 @@ public class ListDoodleController extends ServletAbstract {
         // TODO Auto-generated constructor stub
         
         this.doodleRepository = new DoodleRepository();
+        this.answerRepository = new AnswerRepository();
     }
 
 	/**
@@ -48,8 +51,9 @@ public class ListDoodleController extends ServletAbstract {
 				author = this.doodleRepository.checkIfAuthor(Integer.parseInt(request.getParameter("did")), super.getCurrentUser(request, response).getUid());
 				
 				if(author) {
-					//Answers answers = this.answerRepository.getAllByDid(Integer.parseInt(request.getParameter("did")));
-					//request.setAttribute("answers", answers);
+					AnswerResults answers = this.answerRepository.getAllByDid(Integer.parseInt(request.getParameter("did")));
+					System.out.println(answers.size());
+					request.setAttribute("answers", answers);
 					
 					super.displayLayout("/WEB-INF/Doodle/stats.jsp", request, response);
 					return;
