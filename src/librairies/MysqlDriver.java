@@ -82,8 +82,8 @@ public class MysqlDriver {
     {
         if(driver==null)
         {
-        	driver = new MysqlDriver("localhost", "root", "root", "school_doodle");
-            //driver = new MysqlDriver();
+        	//driver = new MysqlDriver("localhost", "root", "root", "school_doodle");
+            driver = new MysqlDriver();
         }
         
         return driver;

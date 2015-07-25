@@ -26,28 +26,7 @@ $(document).ready(function() {
     });
     
     
-    // Gestion des graphiques
-    var data = [
-	    {
-	        value: 300,
-	        color:"#F7464A",
-	        highlight: "#FF5A5E",
-	        label: "Red"
-	    },
-	    {
-	        value: 50,
-	        color: "#46BFBD",
-	        highlight: "#5AD3D1",
-	        label: "Green"
-	    },
-	    {
-	        value: 100,
-	        color: "#FDB45C",
-	        highlight: "#FFC870",
-	        label: "Yellow"
-	    }
-	];
-    
+    // Charts
     var options = {
     	    //Boolean - Whether we should show a stroke on each segment
     	    segmentShowStroke : true,
@@ -78,6 +57,28 @@ $(document).ready(function() {
 
     	};
     
-    var ctx = $("#myChart")[0].getContext('2d');
+    var dates = [];
+    var values = [];
+    var i = 0;
+    
+    $(".myChart").each(function() {
+    	if(jQuery.inArray($(this).data('date') + ' - ' + $(this).data('heure'), dates) == -1) {
+    		dates[i] = $(this).data('date') + ' - ' + $(this).data('heure');
+    	}
+    	
+    	values[i] = {label: $(this).data('label'), color:"#F7464A", highlight: "#FF5A5E", value: $(this).data('count')};
+    	
+    	i++;
+    });
+    
+    var data = [];
+    for (y = 0; y < dates.length; y++) {
+    	
+    	data.push(values[y]);
+    }
+        	
+	var ctx = $(this)[0].getContext('2d');
     var myPieChart = new Chart(ctx).Pie(data,options);
+
+    
 });

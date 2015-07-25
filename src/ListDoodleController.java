@@ -52,7 +52,6 @@ public class ListDoodleController extends ServletAbstract {
 				
 				if(author) {
 					AnswerResults answers = this.answerRepository.getAllByDid(Integer.parseInt(request.getParameter("did")));
-					System.out.println(answers.size());
 					request.setAttribute("answers", answers);
 					
 					super.displayLayout("/WEB-INF/Doodle/stats.jsp", request, response);

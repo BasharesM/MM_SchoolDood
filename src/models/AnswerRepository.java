@@ -69,9 +69,9 @@ public class AnswerRepository extends AbstractRepository{
 							item.getString("nb"), 
 							item.getString("aid"), 
 							item.getString("daid"), 
-							item.getString("heure"), 
 							item.getString("label"), 
-							item.getString("date"));
+							item.getString("date"),
+							item.getString("heure"));
 				
 				results.push(row);
 				
