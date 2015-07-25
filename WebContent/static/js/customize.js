@@ -57,28 +57,43 @@ $(document).ready(function() {
 
     	};
     
-    var dates = [];
-    var values = [];
-    var i = 0;
-    
-    $(".myChart").each(function() {
-    	if(jQuery.inArray($(this).data('date') + ' - ' + $(this).data('heure'), dates) == -1) {
-    		dates[i] = $(this).data('date') + ' - ' + $(this).data('heure');
-    	}
-    	
-    	values[i] = {label: $(this).data('label'), color:"#F7464A", highlight: "#FF5A5E", value: $(this).data('count')};
-    	
-    	i++;
+
+    var colors = ["#01579B","#03A9F4","#D84315","#43A047","#009688"];
+    var highlight = ["#F44336","#C2185B","#BA68C8","#009688","#03A9F4"];
+    $.each(dates, function( index, val ) {
+    	var data = [];
+    	 $.each(answers[val], function( key, value ) {
+    		 data.push({
+                 value: value.count,
+                 color:colors[key],
+                 highlight: highlight[key],
+                 label: value.label
+             });
+    	 });
+    	 
+    	 $('.charts').append('<div class="col m6"><h4>'+val+'</h4><canvas class="myChart" data-id='+index+' width="400" height="400"></canvas></div>');
+    	 var ctx = $(".myChart[data-id='"+index+"']").get(0).getContext('2d');
+    	 var myPieChart = new Chart(ctx).Pie(data,options);
     });
     
-    var data = [];
-    for (y = 0; y < dates.length; y++) {
-    	
-    	data.push(values[y]);
-    }
-        	
-	var ctx = $(this)[0].getContext('2d');
-    var myPieChart = new Chart(ctx).Pie(data,options);
+//    $(".myChart").each(function() {
+//    	if(jQuery.inArray($(this).data('date') + ' - ' + $(this).data('heure'), dates) == -1) {
+//    		dates[i] = $(this).data('date') + ' - ' + $(this).data('heure');
+//    	}
+//    	
+//    	values[i] = {label: $(this).data('label'), color:"#F7464A", highlight: "#FF5A5E", value: $(this).data('count')};
+//    	
+//    	i++;
+//    });
+//    
+//    var data = [];
+//    for (y = 0; y < dates.length; y++) {
+//    	
+//    	data.push(values[y]);
+//    }
+//        	
+//	var ctx = $(this)[0].getContext('2d');
+//    var myPieChart = new Chart(ctx).Pie(data,options);
 
     
 });

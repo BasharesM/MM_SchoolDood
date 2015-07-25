@@ -36,7 +36,7 @@ public class SendHTMLEmail
             message.setFrom(new InternetAddress(fromAddress));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toAddress));
 
-            message.setSubject("Invitation � un SchoolDood");
+            message.setSubject("Invitation a un SchoolDood");
             message.setText(content);
             Transport.send(message);
 
