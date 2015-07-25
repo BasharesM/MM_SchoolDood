@@ -13,7 +13,7 @@ $(document).ready(function() {
     $("#poire").click(function() {
     	var nbDate = $('.datetime').length + 1;
 
-    	var html = '<div class="col m6"><div class="col m12"><span>Horaire <span class="number">'+nbDate+'</span></span><br/><label for="date">Date : </label><br/><input type="date" id="date" class="datepicker" name="datetime[date][]"/></div><div class="col m6"><label>Heure : </label><input type="time" id="hour" name="datetime[hour][]"/></div><div class="col m6"><label>Minute : </label><input type="time" id="min" name="datetime[min][]"/></div></div>';
+    	var html = '<div class="col m6"><div class="col m12"><span>Horaire <span class="number">'+nbDate+'</span></span><br/><label for="date">Date : </label><br/><input type="date" id="date" class="datepicker" name="datetime[date][]"/></div><div class="col m6"><label>Heure : </label><input type="number" id="hour" name="datetime[hour][]"/></div><div class="col m6"><label>Minute : </label><input type="number" id="min" name="datetime[min][]"/></div></div>';
   
     	$(html).appendTo($("#content-datetime"));
 

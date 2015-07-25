@@ -7,7 +7,7 @@
 <% Emails emails = (Emails) request.getAttribute("emails"); %>
 
 <div class="row">
-	<div class="card blue lighten-5 col m4 offset-m4">
+	<div class="card blue lighten-5 col m10 offset-m1">
 		<form method="post" action="/MM_SchoolDood/Doodle">
 			<div class="input-field m12">
 				<input type="text" name="question"/>
@@ -43,11 +43,11 @@
 							</div>
 		    				<div class="col m6">
 		    					<label>Heure : </label>
-		    					<input type="time" id="hour" name="datetime[hour][]"/>
+		    					<input type="text" id="hour" name="datetime[hour][]"/>
 		    				</div>
 		    				<div class="col m6">
 		    					<label>Minute : </label>
-		    					<input type="time" id="min" name="datetime[min][]"/>
+		    					<input type="text" id="min" name="datetime[min][]"/>
 		    				</div>
 		    			</div>
 		    		</div>      

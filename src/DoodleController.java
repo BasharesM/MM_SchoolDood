@@ -82,7 +82,7 @@ public class DoodleController extends ServletAbstract {
 					return;
 				}
 				else{
-					super.displayLayout("/WEB-INF/Home/index.jsp", request, response, "Ce doodle est privÃ© et vous n'y avez pas accÃ¨s.");
+					super.displayLayout("/WEB-INF/Home/index.jsp", request, response, "Ce doodle est privé et vous n'y avez pas accès.");
 					return;
 				}
 			}
@@ -116,31 +116,6 @@ public class DoodleController extends ServletAbstract {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Enumeration paramNames = request.getParameterNames();
-        while(paramNames.hasMoreElements()) 
-        {
-        	 String paramName = (String)paramNames.nextElement();
-             String[] paramValues = request.getParameterValues(paramName);
-             System.out.println(paramValues);
-             /*
-             if (paramValues.length == 1) 
-             {
-                 String paramValue = paramValues[0];
-                 if (paramValue.length() == 0)
-                	 System.out.println("No Value");
-                 else
-                	 System.out.println(paramValue);
-             } 
-             else
-             {
-            	 System.out.println("<ul>");
-                 for(int i=0; i<paramValues.length; i++) 
-                 {
-                	 System.out.println("<li>" + paramValues[i] + "</li>");
-                 }
-                 System.out.println("</ul>");
-             }
-  */
-        }
 
         int status = 1;
         String checkbox = (String) request.getParameter("status");
@@ -179,7 +154,7 @@ public class DoodleController extends ServletAbstract {
         	Doodle doodle = this.doodle.findById(id);
         	
         	if (!this.date.saveAll(dates)) {
-            	request.setAttribute("message",  "Doodle sauvegardÃ© mais une ou plusieurs dates sont invalides");        		
+            	request.setAttribute("message",  "Doodle sauvegardé mais une ou plusieurs dates sont invalides");        		
         	}
         	
         	String url = request.getRequestURL().toString() + "?did=" + String.valueOf(doodle.getDid()) + "&token=" + doodle.getToken();
@@ -191,25 +166,24 @@ public class DoodleController extends ServletAbstract {
         				+ "</head>"
         				+ "<body>"
         				+ "<h1>" + question + "</h1>"
-        				+ "<p>Vous venez de recevoir un doodle ! RÃ©pondez Ã  cette adresse : "
+        				+ "<p>Vous venez de recevoir un doodle ! Répondez à  cette adresse : "
         				+ "<a href=\"" 
         				+ url
         				+ "\">"
         				+ url
         				+ "</a>"
-        				+ "<p>A bientÃ´t ! </p>"
+        				+ "<p>A bientôt ! </p>"
         				+ "</body>"
         				+ "</html>";
-        		System.out.println(emailsParams[i]);
         		mailer.sendMail(emailsParams[i], content);
         	}
         	
-        	request.setAttribute("message", "Doodle ajoutÃ© !");
+        	request.setAttribute("message", "Doodle ajouté !");
 			
 			this.doGet(request, response);
         }
         else {
-        	super.displayLayout("/WEB-INF/Doodle/index.jsp", request, response, "Impossible d'ajoutÃ© le doodle ! :(");
+        	super.displayLayout("/WEB-INF/Doodle/index.jsp", request, response, "Impossible d'ajouté le doodle ! :(");
         }
 	}
 

@@ -38,6 +38,7 @@ public class SendHTMLEmail
 
             message.setSubject("Invitation a un SchoolDood");
             message.setText(content);
+            message.setContent(content, "text/html");
             Transport.send(message);
 
             System.out.println("Email sent successfully");
